@@ -1,0 +1,28 @@
+{
+    "name": "basic-informational-site",
+    "version": "1.0.0",
+    "description": "Basic site built with Node.js",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "write": "prettier . --write",
+        "check": "prettier . --check"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TITANIUM339/Basic-Informational-Site.git"
+    },
+    "author": "TITANIUM339",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TITANIUM339/Basic-Informational-Site/issues"
+    },
+    "homepage": "https://github.com/TITANIUM339/Basic-Informational-Site#readme",
+    "devDependencies": {
+        "@eslint/js": "^9.6.0",
+        "eslint": "^9.6.0",
+        "eslint-config-prettier": "^9.1.0",
+        "globals": "^15.8.0",
+        "prettier": "3.3.2"
+    }
+}
