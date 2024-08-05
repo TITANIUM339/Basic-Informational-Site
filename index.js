@@ -1,42 +1,40 @@
-import http from "node:http";
+import express from "express";
 import { readFile } from "node:fs/promises";
 
-const port = 80;
+const app = express();
 
-http.createServer(async (request, response) => {
-    let status = 200;
-    let path;
-
-    switch (request.url) {
-        case "/":
-            path = "./index.html";
-
-            break;
-
-        case "/about":
-            path = "./about.html";
-
-            break;
-
-        case "/contact":
-            path = "./contact-me.html";
-
-            break;
-
-        default:
-            status = 404;
-            path = "./404.html";
-
-            break;
-    }
-
-    response.writeHead(status, { "Content-Type": "text/html" });
-
+app.get("/", (request, response) => {
     console.log(request.method, request.url);
 
-    const file = await readFile(path);
+    readFile("./index.html").then((file) => {
+        response.format({ html: () => response.send(file) });
+    });
+});
 
-    response.end(file);
-}).listen(port);
+app.get("/about", (request, response) => {
+    console.log(request.method, request.url);
 
-console.log(`Serving on: http://localhost:${port}`);
+    readFile("./about.html").then((file) => {
+        response.format({ html: () => response.send(file) });
+    });
+});
+
+app.get("/contact", (request, response) => {
+    console.log(request.method, request.url);
+
+    readFile("./contact-me.html").then((file) => {
+        response.format({ html: () => response.send(file) });
+    });
+});
+
+app.get("*", (request, response) => {
+    console.log(request.method, request.url);
+
+    readFile("./404.html").then((file) => {
+        response.format({ html: () => response.status(404).send(file) });
+    });
+});
+
+const PORT = 80;
+
+app.listen(PORT, () => console.log(`Serving on: http://localhost:${PORT}`));
